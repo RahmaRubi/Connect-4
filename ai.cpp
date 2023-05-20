@@ -118,7 +118,7 @@ int getComputerMoveModerate(char board[ROWS][COLS]) {
                     break;
                 }
             }
-
+            
             // check if the player wins with this move
             player = 'X';
             if (check() == 1) {
