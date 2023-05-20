@@ -12,7 +12,7 @@ void setColor(int color)
 // return the ai input based on the level the player choose 
 int levelChecker(char board[ROWS][COLS]) 
 {
-    return (level == 1 ? getComputerMoveEasy(board) : getComputerMoveModerate(board));
+    return (level == "1" ? getComputerMoveEasy(board) : getComputerMoveModerate(board));
 }
 
 // draws animations before displaying text

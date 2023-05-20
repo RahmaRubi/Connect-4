@@ -157,7 +157,7 @@ int getComputerMoveModerate(char board[ROWS][COLS]) {
         }
     }
 
-    if (level == 3)
+    if (level == "3")
     {
         // play tactically to create or block consecutive sequences
         for (int col = 0; col < COLS; col++) {

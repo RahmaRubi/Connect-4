@@ -1,13 +1,15 @@
 #include "main.h"
 
 char board[ROWS][COLS]; // game board
-int level = 0; // difficulty
+
 string Name; // player 1 name
 string Name2; // player 2 name
+string level; // difficulty
+string mode; // game mode
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE); // used to control output like animations and colors
 char player = 'X'; // player piece
 int padding = 0; // padding for centering
-string mode;
+
 
 //the 1v1 game mode
 void Game1v1() {
@@ -100,8 +102,9 @@ void Menu() {
 
     while (mode != "0" && mode != "1") // checks if user input is correct
     {
-        cout << "Illegal input please only choose between 1 or 0: \n";
+        cout << "Illegal input please only choose between 1 or 0: ";
         cin >> mode;
+        anim();
     }
     if (mode == "0")
     {
@@ -113,8 +116,10 @@ void Menu() {
     {
         cout << "Please enter your name: "; cin >> Name;
         anim();
-        cout << "choose level [Easy(1), Moderate(2), Hard(3)]: "; cin >> level;
-        anim();
+        do {
+            cout << "choose level [Easy(1), Moderate(2), Hard(3)]: "; cin >> level;
+            anim();
+        } while (level != "1" && level != "2" && level != "3");
         Start(); // Vs ai mode
     }
 }

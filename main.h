@@ -20,13 +20,14 @@
 using namespace std;
 
 // the global variables for the players names, the grid size, level,
-extern int level;
+
 extern int padding;
 extern char board[ROWS][COLS];
 extern char player;
 extern string mode;
 extern string Name;
 extern string Name2;
+extern string level;
 
 // prototypes for the functions for the different game levels
 int levelChecker(char board[ROWS][COLS]);
