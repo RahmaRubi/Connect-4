@@ -24,6 +24,7 @@ extern int level;
 extern int padding;
 extern char board[ROWS][COLS];
 extern char player;
+extern char mode;
 extern string Name;
 extern string Name2;
 
@@ -31,7 +32,6 @@ extern string Name2;
 int levelChecker(char board[ROWS][COLS]);
 int getComputerMoveEasy(char board[ROWS][COLS]);
 int getComputerMoveModerate(char board[ROWS][COLS]);
-int getComputerMoveHard(char board[ROWS][COLS]);
 bool checkConsecutive(char board[ROWS][COLS], int row, int col, char player, int consecutiveCount);
 
 

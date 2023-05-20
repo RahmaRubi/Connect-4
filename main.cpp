@@ -7,8 +7,9 @@ string Name2; // player 2 name
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE); // used to control output like animations and colors
 char player = 'X'; // player piece
 int padding = 0; // padding for centering
+char mode;
 
- //the 1v1 game mode
+//the 1v1 game mode
 void Game1v1() {
 
 
@@ -44,8 +45,6 @@ void Game1v1() {
 void Start() {
     srand(time(NULL));
     int temp = 0;
-
-
     while (true) {
         // Player's turn
         player = 'X';
@@ -65,13 +64,12 @@ void Start() {
             if (gameover(temp))
                 break;
     }
-
 }
 
 // menu function - takes mandatory input from user like game mode and their name
 void Menu() {
     clear; // clears output to keep stdout clean
-    char play;
+    
     fill(&board[0][0], &board[0][0] + sizeof(board), ' '); // initializes array
     string gameTitle = R"(
 
@@ -83,7 +81,6 @@ void Menu() {
                                                                                         
                                          
 )";
-
 
     // Calculate the necessary padding for centering
     CONSOLE_SCREEN_BUFFER_INFO csbi;
@@ -98,21 +95,21 @@ void Menu() {
     cout << "welcome, player! please Choose game mode:" << endl;
     cout << "0.Player Vs Player" << endl;
     cout << "1.Player Vs AI\n";
-    cin >> play;
+    cin >> mode;
     anim();
 
-    while (play != '0' && play != '1') // checks if user input is correct
+    while (mode != '0' && mode != '1') // checks if user input is correct
     {
         cout << "Illegal input please only choose between 1 or 0: \n";
-        cin >> play;
+        cin >> mode;
     }
-    if (play == '0')
+    if (mode == '0')
     {
         cout << "Player one's Name: "; cin >> Name;
         cout << "Player two's Name: "; cin >> Name2;
         Game1v1(); // player Vs player mode
     }
-    else if (play == '1')
+    else if (mode == '1')
     {
         cout << "Please enter your name: "; cin >> Name;
         anim();
@@ -120,13 +117,7 @@ void Menu() {
         anim();
         Start(); // Vs ai mode
     }
-
-
-
-
-
 }
-
 // the main function - starts program flow - always returns 0
 int main() {
 

@@ -9,19 +9,20 @@ void setColor(int color)
     SetConsoleTextAttribute(hConsole, color);
 }
 
-// return the player game based on the level the player choose 
+// return the ai input based on the level the player choose 
 int levelChecker(char board[ROWS][COLS]) 
 {
-    return (level == 1 ? getComputerMoveEasy(board) : 0);//level == 2 ? getComputerMoveModerate(board) : getComputerMoveHard(board));
+    return (level == 1 ? getComputerMoveEasy(board) : getComputerMoveModerate(board));
 }
 
+// draws animations before displaying text
 void anim()
 {
     system("cls");
     for (int line = 0; line < 2; line++) {
         // Print three dots in a line
         for (int i = 0; i < 3; i++) {
-            cout << string(padding, ' ') << ".";
+            cout << pad(' ') << ".";
             cout.flush(); // Flush the output stream to ensure dots are immediately visible
             this_thread::sleep_for(chrono::milliseconds(100)); // Pause for 0.1 seconds
         }
@@ -29,10 +30,10 @@ void anim()
        cout <<endl;
     }
 
-    cout << string(padding, ' ') << "----------------------------------\n";
+    cout << pad(' ') << "----------------------------------\n";
 }
 
-
+// function that handles player move
 void play()
 {
     printBoard(board);
@@ -48,7 +49,7 @@ void play()
 
     makeMove(board, col, player);
 }
-
+// function that checks for tie
 bool istie()
 {
     int x = 0;
@@ -58,7 +59,7 @@ bool istie()
     return (x == 0);
 }
 
-
+// function that handles ai moves
 void ai()
 {
     printBoard(board);
@@ -67,14 +68,7 @@ void ai()
     int col = levelChecker(board);
     makeMove(board, col, 'O');
 }
-/**
-* 
-* check - checks for game end
-* Return: 0 if game continues - 1 if player 1 won - 2 if player 2 won - 3 if tie
-* 
-*/
-
-
+// function that checks for end of game - Returns 0 if none - 1 if player 1 won - 2 if player 2 won - 3 if tie
 int check() {
     if (istie())
         return 3;
@@ -118,6 +112,7 @@ int check() {
     return 0;
 }
 
+// function that handels end of game - Returns 1 if player doesn't want to play again to end program flow
 bool gameover(int x)
 {
     char flag;
@@ -125,10 +120,10 @@ bool gameover(int x)
     switch (x)
     {
     case 1:
-        cout << Name << " wins!";
+        cout << (mode == '0' ? Name + " wins!" : "You win!");
         break;
     case 2:
-        cout << Name2 << " wins!";
+        cout << (mode == '0' ? Name2 + " wins!" : "You lose!");
         break;
     case 3:
         cout << "It's a tie!";
@@ -156,25 +151,15 @@ void printBoard(char board[ROWS][COLS]) {
        FOREGROUND_INTENSITY | FOREGROUND_RED,
        FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_RED,
        FOREGROUND_INTENSITY | FOREGROUND_BLUE | FOREGROUND_RED,
-       FOREGROUND_RED | FOREGROUND_BLUE // magenta-like color
+       FOREGROUND_RED | FOREGROUND_BLUE 
     }; // array of color attributes
-    int numColors = sizeof(colors) / sizeof(colors[0]); // calculate the number of colors
-
-
-
-
-    // Calculate the necessary padding for centering
-    CONSOLE_SCREEN_BUFFER_INFO csbi;
-    if (GetConsoleScreenBufferInfo(hConsole, &csbi)) {
-        int consoleWidth = csbi.srWindow.Right - csbi.srWindow.Left + 1;
-        padding = (consoleWidth - (sequenceLength * 3)) / 2;
-    }
+    int numColors = 9; // the number of colors
 
     // Print top padding
-    cout << string(padding, ' ') << endl;
+    cout << pad(' ') << endl;
 
     // Print column numbers with padding
-    cout << string(padding, ' ');
+    cout << pad(' ');
     cout << "  ";
     for (int i = 0; i < sequenceLength; i++) {
         // Assign colors based on the pattern
@@ -195,35 +180,25 @@ void printBoard(char board[ROWS][COLS]) {
     for (int i = ROWS - 1; i >= 0; i--) {
         // Print row separator
         SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE);
-        cout << string(padding, ' ') << "|";
+        cout << pad(' ') << "|";
 
         for (int j = 0; j < COLS; j++) {
             // Set text color based on character
-            if (board[i][j] == 'X') {
+            if (board[i][j] == 'X') 
                 SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN); // set text color to green
-            }
-            else if (board[i][j] == 'O') {
+            else if (board[i][j] == 'O')
                 SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_BLUE); // set text color to magenta-like color
-            }
-            else if (board[i][j] == ' ' || board[i][j] == '_') {
-                SetConsoleTextAttribute(hConsole, FOREGROUND_CYAN); // set text color to cyan
-            }
-            else {
-                SetConsoleTextAttribute(hConsole, FOREGROUND_WHITE); // set text color to white (default)
-            }
 
-            cout << board[i][j] << "_|";
+            cout << board[i][j];
+            SetConsoleTextAttribute(hConsole, FOREGROUND_CYAN);// set text color to cyan
+            cout << "_|";
         }
-
         // Reset text color to default
         SetConsoleTextAttribute(hConsole, FOREGROUND_WHITE);
-
         cout << endl;
     }
-
     // Print bottom padding
-    cout << string(padding, ' ') << endl;
-
+    cout << pad(' ') << endl;
 }
 
 
