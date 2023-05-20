@@ -120,10 +120,10 @@ bool gameover(int x)
     switch (x)
     {
     case 1:
-        cout << (mode == '0' ? Name + " wins!" : "You win!");
+        cout << (mode == "0" ? Name + " wins!" : "You win!");
         break;
     case 2:
-        cout << (mode == '0' ? Name2 + " wins!" : "You lose!");
+        cout << (mode == "0" ? Name2 + " wins!" : "You lose!");
         break;
     case 3:
         cout << "It's a tie!";

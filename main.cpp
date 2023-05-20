@@ -7,7 +7,7 @@ string Name2; // player 2 name
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE); // used to control output like animations and colors
 char player = 'X'; // player piece
 int padding = 0; // padding for centering
-char mode;
+string mode;
 
 //the 1v1 game mode
 void Game1v1() {
@@ -98,18 +98,18 @@ void Menu() {
     cin >> mode;
     anim();
 
-    while (mode != '0' && mode != '1') // checks if user input is correct
+    while (mode != "0" && mode != "1") // checks if user input is correct
     {
         cout << "Illegal input please only choose between 1 or 0: \n";
         cin >> mode;
     }
-    if (mode == '0')
+    if (mode == "0")
     {
         cout << "Player one's Name: "; cin >> Name;
         cout << "Player two's Name: "; cin >> Name2;
         Game1v1(); // player Vs player mode
     }
-    else if (mode == '1')
+    else if (mode == "1")
     {
         cout << "Please enter your name: "; cin >> Name;
         anim();

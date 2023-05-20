@@ -24,7 +24,7 @@ extern int level;
 extern int padding;
 extern char board[ROWS][COLS];
 extern char player;
-extern char mode;
+extern string mode;
 extern string Name;
 extern string Name2;
 
