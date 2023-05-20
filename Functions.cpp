@@ -129,9 +129,13 @@ bool gameover(int x)
         cout << "It's a tie!";
         break;
     }
-    this_thread::sleep_for(chrono::seconds(2));
+    this_thread::sleep_for(chrono::seconds(3));
     anim();
-    cout << "do you want to play again ? (y/N) "; cin >> flag;
+    do
+    {
+        cout << "do you want to play again ? (y/N) "; flag = _getch();
+        cout << '\r';
+    } while ('y' != tolower(flag) && 'n' != tolower(flag));
     if (flag == 'y' || flag == 'Y')
         Menu();
     return 1;
