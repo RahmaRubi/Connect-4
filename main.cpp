@@ -15,19 +15,17 @@ int padding = 0; // padding for centering
 void Game1v1() {
 
 
-    srand(time(NULL));
-
     while (true) {
         int temp;
         // Player's turn
         play();
         // Check for game end
         temp = check();
-        // Switch player
-        player = (player == 'X') ? 'O' : 'X';
         if (temp)
              if (gameover(temp))
                 break;
+        // Switch player
+        player = (player == 'X') ? 'O' : 'X';
         // player two's turn
         play();
         // Check again for game end

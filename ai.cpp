@@ -77,7 +77,7 @@ int getComputerMoveEasy(char board[ROWS][COLS]) {
     do {
         col = rand() % COLS;
     } while (board[ROWS - 1][col] != ' ');
-    return col;
+    return col+1;
 }
 
 // function for moderate and hard modes
@@ -93,7 +93,8 @@ int getComputerMoveModerate(char board[ROWS][COLS]) {
                     break;
                 }
             }
-           
+        //    printBoard(board);
+        //    system("pause");
             // check if the computer wins with this move
             player = 'O';
             if (check() == 2) {
@@ -118,7 +119,8 @@ int getComputerMoveModerate(char board[ROWS][COLS]) {
                     break;
                 }
             }
-            
+            //printBoard(board);
+            //system("pause");
             // check if the player wins with this move
             player = 'X';
             if (check() == 1) {
@@ -144,9 +146,33 @@ int getComputerMoveModerate(char board[ROWS][COLS]) {
                     break;
                 }
             }
+            if (level == "3")
+         {
+            // play tactically to create or block consecutive sequences
+            for (int col = 0; col < COLS; col++) {
+                if (board[ROWS - 1][col] == ' ') {
+                    // simulate making a move for the computer in this column
+                    int row;
+                    for (row = 0; row < ROWS; row++) {
+                        if (board[row][col] == ' ') {
+                            board[row][col] = 'O';
+                            break;
+                        }
+                    }
 
+                    // check if the computer can create a winning sequence
+                    if (checkConsecutive(board, row, col, 'O', 2)) {
+                        // undo the simulated move
+                        board[row][col] = ' ';
+                        return col+1;
+                    }
+                    // undo the simulated move
+                    board[row][col] = ' ';
+                }
+            }
+          }
             // check if the computer can create or block consecutive sequences
-            if (checkConsecutive(board, row, col, 'O', 3)) {
+            if (checkConsecutive(board, row, col, 'O', 2)) {
                 // undo the simulated move
                 board[row][col] = ' ';
                 return col + 1;
@@ -157,40 +183,6 @@ int getComputerMoveModerate(char board[ROWS][COLS]) {
         }
     }
 
-    if (level == "3")
-    {
-        // play tactically to create or block consecutive sequences
-        for (int col = 0; col < COLS; col++) {
-            if (board[ROWS - 1][col] == ' ') {
-                // simulate making a move for the computer in this column
-                int row;
-                for (row = 0; row < ROWS; row++) {
-                    if (board[row][col] == ' ') {
-                        board[row][col] = 'O';
-                        break;
-                    }
-                }
-
-                // check if the computer can create a winning sequence
-                if (checkConsecutive(board, row, col, 'O', 4)) {
-                    // undo the simulated move
-                    board[row][col] = ' ';
-                    return col;
-                }
-
-                // check if the computer needs to block the player's potential winning move
-                if (checkConsecutive(board, row, col, 'X', 4)) {
-                    // undo the simulated move
-                    board[row][col] = ' ';
-                    continue;  // try another column
-                }
-
-                // undo the simulated move
-                board[row][col] = ' ';
-            }
-        }
-
-    }
 
     // if no tactical move is available, use the easy mode strategy
     return getComputerMoveEasy(board);

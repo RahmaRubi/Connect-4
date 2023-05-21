@@ -18,7 +18,7 @@ int levelChecker(char board[ROWS][COLS])
 // draws animations before displaying text
 void anim()
 {
-    system("cls");
+    clear;
     for (int line = 0; line < 2; line++) {
         // Print three dots in a line
         for (int i = 0; i < 3; i++) {
@@ -38,25 +38,26 @@ void play()
 {
     printBoard(board);
     cout << (player == 'X'? Name:Name2) << ", choose a column: ";
-    int col;
-    cin >> col;
-
-    while (col < 1 || col > COLS || board[ROWS - 1][col - 1] != ' ') {
-        printBoard(board);
+    string col_temp;
+    cin >> col_temp;
+    
+    while (col_temp.size()!=1||col_temp[0] -'0'< 1 || col_temp[0]-'0' > COLS || board[ROWS - 1][col_temp[0]-'0' - 1] != ' ') {
+       printBoard(board);
         cout << "Invalid move! Try again." << endl;
-        cin >> col;
+        cin >> col_temp;
     }
-
-    makeMove(board, col, player);
+	int col=col_temp[0]-'0';
+   makeMove(board, col, player);
 }
 // function that checks for tie
 bool istie()
 {
-    int x = 0;
-    for (int i = 0; i < COLS; i++)
-        if (board[ROWS - 1][i] == ' ')
-            x++;
-    return (x == 0);
+	for (int i = 0; i < COLS; i++)
+	{
+		if (board[ROWS - 1][i] == ' ')
+			return false;
+	}
+	return true;
 }
 
 // function that handles ai moves
@@ -133,7 +134,7 @@ bool gameover(int x)
     anim();
     do
     {
-        cout << "do you want to play again ? (y/N) "; flag = _getch();
+        cout << "do you want to play again ? (Y/n) "; flag = _getch();
         cout << '\r';
     } while ('y' != tolower(flag) && 'n' != tolower(flag));
     if (flag == 'y' || flag == 'Y')
