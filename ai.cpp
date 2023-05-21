@@ -136,16 +136,6 @@ int getComputerMoveModerate(char board[ROWS][COLS]) {
     }
 
     // play tactically to create or block consecutive sequences
-    for (int col = 0; col < COLS; col++) {
-        if (board[ROWS - 1][col] == ' ') {
-            // simulate making a move for the computer in this column
-            int row;
-            for (row = 0; row < ROWS; row++) {
-                if (board[row][col] == ' ') {
-                    board[row][col] = 'O';
-                    break;
-                }
-            }
             if (level == "3")
          {
             // play tactically to create or block consecutive sequences
@@ -171,6 +161,16 @@ int getComputerMoveModerate(char board[ROWS][COLS]) {
                 }
             }
           }
+    for (int col = 0; col < COLS; col++) {
+        if (board[ROWS - 1][col] == ' ') {
+            // simulate making a move for the computer in this column
+            int row;
+            for (row = 0; row < ROWS; row++) {
+                if (board[row][col] == ' ') {
+                    board[row][col] = 'O';
+                    break;
+                }
+            }
             // check if the computer can create or block consecutive sequences
             if (checkConsecutive(board, row, col, 'O', 2)) {
                 // undo the simulated move
