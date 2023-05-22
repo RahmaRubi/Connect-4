@@ -1,4 +1,12 @@
 # Connect-4
 
-functions.cpp and ai.cpp need some reworks in terms of optimization and doccumentation
-however everything else is done
+Connect 4 team project 
+
+the following are flowcharts for the program
+![Main function flowchart](extra/main.png)
+
+as for the PvP gamemode:
+![PvP gamemode flowchart](extra/pvp.png)
+
+and the ani gamemode:
+![PvP gamemode flowchart](extra/ai.png)
