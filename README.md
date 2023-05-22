@@ -13,3 +13,7 @@ as for the PvP gamemode:
 and the Player vs AI gamemode:
 
 ![PvP gamemode flowchart](extra/ai.png)
+
+and for the way the ai plays:
+
+![AI decision making flowchart](extra/ai play.png)
