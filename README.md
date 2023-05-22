@@ -16,4 +16,4 @@ and the Player vs AI gamemode:
 
 and for the way the ai plays:
 
-![AI decision making flowchart](extra/ai play.png)
+![AI decision making flowchart](extra/ai_play.png)
