@@ -2,11 +2,14 @@
 
 Connect 4 team project 
 
-the following are flowcharts for the program
+the following are flowcharts for the program:
+
 ![Main function flowchart](extra/main.png)
 
 as for the PvP gamemode:
+
 ![PvP gamemode flowchart](extra/pvp.png)
 
-and the ani gamemode:
+and the Player vs AI gamemode:
+
 ![PvP gamemode flowchart](extra/ai.png)
